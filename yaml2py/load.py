@@ -38,7 +38,7 @@ def __load_config_from_file(filename, conf_path=None):
 
     Parameters
     ----------
-    file_name : string
+    filename : string
         The name of the YAML file to load.
 
     conf_path : string, optional (default: $CONF_PATH)
@@ -49,13 +49,13 @@ def __load_config_from_file(filename, conf_path=None):
     """
     if conf_path is None:
         conf_path = os.environ.get("CONF_PATH", ".")
-    conf_file_name = conf_path + os.sep + file_name
-    if os.path.exists(conf_file_name):
-        config = yaml.load(open(conf_file_name, "r"))
+    conf_filename = conf_path + os.sep + filename
+    if os.path.exists(conf_filename):
+        config = yaml.load(open(conf_filename, "r"))
         return config
     else:
         warnings.warn("Could not find any configuration file. CONF_PATH=%s, "
-                      "conf_file_name=%s" % (conf_path, conf_file_name))
+                      "conf_filename=%s" % (conf_path, conf_filename))
         return {}
 
 
