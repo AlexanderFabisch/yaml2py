@@ -1,11 +1,9 @@
-package: sklearn.pipeline
-type: Pipeline
+type: sklearn.pipeline.Pipeline
 steps:
     - - pca
       - package: sklearn.decomposition
         type: PCA
         n_components: 50
     - - svc
-      - package: sklearn.svm
-        type: SVC
+      - type: sklearn.svm.SVC
         gamma: 10.0

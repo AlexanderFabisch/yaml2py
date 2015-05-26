@@ -18,16 +18,14 @@ file and mail it to a friend.
 
 .. code-block:: yaml
 
-    package: sklearn.pipeline
-    type: Pipeline
+    type: sklearn.pipeline.Pipeline
     steps:
         - - pca
-        - package: sklearn.decomposition
+          - package: sklearn.decomposition
             type: PCA
             n_components: 50
         - - svc
-        - package: sklearn.svm
-            type: SVC
+          - type: sklearn.svm.SVC
             gamma: 10.0
 
 Note that you only have to add the entries for package and type besides the

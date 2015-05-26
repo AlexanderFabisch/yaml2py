@@ -85,7 +85,7 @@ def from_dict(config):
     for k, v in it:
         config[k] = from_dict(v)
 
-    if isinstance(config, dict) and "package" in config and "type" in config:
+    if isinstance(config, dict) and "type" in config:
         return recursive_from_dict(config)
     else:
         return config
@@ -113,13 +113,19 @@ def recursive_from_dict(config):
 
     try:
         package_name = c.pop("package")
+        has_explicit_package = True
     except KeyError:
-        raise KeyError("Package name '%s' is unknown" % package_name)
+        has_explicit_package = False
 
     try:
         type_name = c.pop("type")
     except KeyError:
         raise ValueError("No type given")
+
+    if not has_explicit_package:
+        type_parts = type_name.split(".")
+        package_name = ".".join(type_parts[:-1])
+        type_name = type_parts[-1]
 
     package = __import__(package_name, {}, {}, fromlist=["dummy"], level=0)
     class_dict = dict(inspect.getmembers(package))
